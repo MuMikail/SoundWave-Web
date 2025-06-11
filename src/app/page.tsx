@@ -551,7 +551,7 @@ export default function Home() {
           <div className="border-t border-purple-500/20 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="text-white/50 text-sm">
-                © 2024 SoundWave. All rights reserved.
+                © 2025 Mikail. All rights reserved.
               </div>
               
               <div className="flex flex-wrap gap-6 text-sm text-white/50">
