@@ -1222,7 +1222,7 @@ export default function Home() {
 
           <div className="border-t border-purple-500/20 mt-12 pt-8 text-center">
             <p className="text-white/60">
-              © 2024 SoundWave. All rights reserved. Made with ❤️ for music
+              © 2024 Mikail. All rights reserved. Made with ❤️ for music
               lovers.
             </p>
           </div>
