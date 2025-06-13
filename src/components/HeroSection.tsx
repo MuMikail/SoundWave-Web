@@ -30,7 +30,7 @@ export default function HeroSection() {
                 backgroundSize: '200% 200%',
               }}
             >
-              SoundWave
+              Music
             </motion.span>
             <motion.span
               className="bg-gradient-to-r from-pink-400 via-purple-400 to-purple-500 bg-clip-text text-transparent"

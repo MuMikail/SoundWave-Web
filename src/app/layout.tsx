@@ -5,7 +5,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'LiquidMusic - Feel the Liquid Music Flow',
+  title: 'SoundWave - Feel the Music Flow',
   description: 'Immerse yourself in a world of crystal-clear sound and liquid-smooth experience. Discover music that flows through your soul.',
   keywords: 'music, streaming, liquid glass, audio, player',
 };

@@ -5,9 +5,9 @@ import { useState } from 'react';
 
 const navItems = [
   { name: 'Discover', href: '#discover' },
-  { name: 'Trending', href: '#trending' },
+  { name: 'Most Stream', href: '#most-stream' },
   { name: 'Artists', href: '#artists' },
-  { name: 'Playlist', href: '#playlist' },
+  { name: 'Albums', href: '#albums' },
 ];
 
 export default function Header() {

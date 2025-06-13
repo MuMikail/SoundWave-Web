@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, SkipBack, SkipForward, Volume2, Heart } from 'lucide-react';
 import { Song } from '@/data/music';
+import YouTube from 'react-youtube';
 
 interface MusicPlayerProps {
   currentSong: Song | null;
@@ -22,44 +23,73 @@ export default function MusicPlayer({
 }: MusicPlayerProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(1);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const [volume, setVolume] = useState(80);
+  const [youtubePlayer, setYoutubePlayer] = useState<any>(null);
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
+  const youtubeOpts = {
+    height: '0',
+    width: '0',
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      disablekb: 1,
+      fs: 0,
+      modestbranding: 1,
+      rel: 0,
+    },
+  };
 
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
+  const onYouTubeReady = (event: any) => {
+    setYoutubePlayer(event.target);
+    event.target.setVolume(volume);
+  };
 
-    audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('loadedmetadata', updateDuration);
-
-    return () => {
-      audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('loadedmetadata', updateDuration);
-    };
-  }, [currentSong]);
-
-  // Update volume when volume state changes
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) {
-      audio.volume = volume;
+  const onYouTubeStateChange = (event: any) => {
+    if (event.data === 0) { // Video ended
+      onNext();
+    } else if (event.data === 1) { // Playing
+      if (youtubePlayer) {
+        setDuration(youtubePlayer.getDuration());
+      }
     }
-  }, [volume]);
+  };
+
+  // Update progress
+  useEffect(() => {
+    if (isPlaying && youtubePlayer) {
+      const interval = setInterval(() => {
+        if (youtubePlayer.getCurrentTime && youtubePlayer.getDuration) {
+          const current = youtubePlayer.getCurrentTime();
+          const total = youtubePlayer.getDuration();
+          
+          if (current && total) {
+            setCurrentTime(current);
+            setDuration(total);
+          }
+        }
+      }, 1000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [isPlaying, youtubePlayer]);
 
   // Handle play/pause
   useEffect(() => {
-    const audio = audioRef.current;
-    if (audio && currentSong) {
+    if (youtubePlayer && currentSong) {
       if (isPlaying) {
-        audio.play().catch(console.error);
+        youtubePlayer.playVideo();
       } else {
-        audio.pause();
+        youtubePlayer.pauseVideo();
       }
     }
-  }, [isPlaying, currentSong]);
+  }, [isPlaying, youtubePlayer]);
+
+  // Load new song
+  useEffect(() => {
+    if (youtubePlayer && currentSong) {
+      youtubePlayer.loadVideoById(currentSong.youtubeId); // Ganti dari audioUrl
+    }
+  }, [currentSong, youtubePlayer]);
 
   const formatTime = (time: number) => {
     if (isNaN(time)) return '0:00';
@@ -69,17 +99,20 @@ export default function MusicPlayer({
   };
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current;
-    if (audio && duration) {
+    if (youtubePlayer && duration) {
       const newTime = (parseFloat(e.target.value) / 100) * duration;
-      audio.currentTime = newTime;
+      youtubePlayer.seekTo(newTime);
       setCurrentTime(newTime);
     }
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(e.target.value);
+    const newVolume = parseInt(e.target.value);
     setVolume(newVolume);
+    
+    if (youtubePlayer) {
+      youtubePlayer.setVolume(newVolume);
+    }
   };
 
   if (!currentSong) return null;
@@ -91,12 +124,15 @@ export default function MusicPlayer({
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      <audio
-        ref={audioRef}
-        src={currentSong.audioUrl}
-        onEnded={onNext}
-        preload="metadata"
-      />
+      {/* Hidden YouTube Player */}
+      <div className="fixed bottom-0 left-0 opacity-0 pointer-events-none">
+        <YouTube
+          videoId={currentSong.youtubeId} // Ganti dari audioUrl
+          opts={youtubeOpts}
+          onReady={onYouTubeReady}
+          onStateChange={onYouTubeStateChange}
+        />
+      </div>
       
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Song Info */}
@@ -176,8 +212,7 @@ export default function MusicPlayer({
           <input
             type="range"
             min="0"
-            max="1"
-            step="0.1"
+            max="100"
             value={volume}
             onChange={handleVolumeChange}
             className="w-24 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
