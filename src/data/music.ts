@@ -5,6 +5,7 @@ export interface Song {
   album: string;
   duration: string;
   cover: string;
+  youtubeId: string; 
   audioUrl: string;
   genre: string;
 }
@@ -18,6 +19,7 @@ export const songs: Song[] = [
     duration: "3:45",
     cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop",
     audioUrl: "/audio/sample1.mp3",
+        youtubeId: "dQw4w9WgXcQ",
     genre: "Electronic"
   },
   {
@@ -26,6 +28,7 @@ export const songs: Song[] = [
     artist: "Aqua Sounds",
     album: "Deep Blue",
     duration: "4:12",
+        youtubeId: "ZZ5LpwO-An4",
     cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop",
     audioUrl: "/audio/sample2.mp3",
     genre: "Ambient"
@@ -36,6 +39,7 @@ export const songs: Song[] = [
     artist: "Cyber Pulse",
     album: "Digital Dreams",
     duration: "3:28",
+      youtubeId: "M7lc1UVf-VE", 
     cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop",
     audioUrl: "/audio/sample3.mp3",
     genre: "Synthwave"
@@ -46,6 +50,7 @@ export const songs: Song[] = [
     artist: "Nature's Call",
     album: "Organic Sounds",
     duration: "5:03",
+    youtubeId: "hFZFjoX2cGg",
     cover: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=300&fit=crop",
     audioUrl: "/audio/sample4.mp3",
     genre: "Nature"
