@@ -5,49 +5,49 @@ export interface Song {
   album: string;
   duration: string;
   cover: string;
-  youtubeId: string;
+  audioUrl: string;
   genre: string;
 }
 
 export const songs: Song[] = [
   {
     id: 1,
-    title: "Anti-Hero",
-    artist: "Taylor Swift",
-    album: "Midnights",
-    duration: "3:20",
-    cover: "https://i.scdn.co/image/ab67616d0000b273bb54dde68cd23e2a268ae0f5",
-    youtubeId: "b1kbLWvqugk",
-    genre: "Pop"
+    title: "Midnight Dreams",
+    artist: "Luna Echo",
+    album: "Ethereal Nights",
+    duration: "3:45",
+    cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop",
+    audioUrl: "/audio/sample1.mp3",
+    genre: "Electronic"
   },
   {
     id: 2,
-    title: "Flowers",
-    artist: "Miley Cyrus",
-    album: "Endless Summer Vacation",
-    duration: "3:20",
-    cover: "https://i.scdn.co/image/ab67616d0000b273f4d5cc8e2c48f74d0b8c7b4e",
-    youtubeId: "G7KNmW9a75Y",
-    genre: "Pop"
+    title: "Ocean Waves",
+    artist: "Aqua Sounds",
+    album: "Deep Blue",
+    duration: "4:12",
+    cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop",
+    audioUrl: "/audio/sample2.mp3",
+    genre: "Ambient"
   },
   {
     id: 3,
-    title: "Unholy",
-    artist: "Sam Smith ft. Kim Petras",
-    album: "Gloria",
-    duration: "2:36",
-    cover: "https://i.scdn.co/image/ab67616d0000b2734f39af2c2e73e8c2c1b0e8e8",
-    youtubeId: "Uq9gPaIzbe8",
-    genre: "Pop"
+    title: "Neon Lights",
+    artist: "Cyber Pulse",
+    album: "Digital Dreams",
+    duration: "3:28",
+    cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop",
+    audioUrl: "/audio/sample3.mp3",
+    genre: "Synthwave"
   },
   {
     id: 4,
-    title: "Bad Habit",
-    artist: "Steve Lacy",
-    album: "Gemini Rights",
-    duration: "3:51",
-    cover: "https://i.scdn.co/image/ab67616d0000b273b85259a971157e9f2728457a",
-    youtubeId: "VF-r5TtlT9w",
-    genre: "R&B"
+    title: "Forest Whispers",
+    artist: "Nature's Call",
+    album: "Organic Sounds",
+    duration: "5:03",
+    cover: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=300&fit=crop",
+    audioUrl: "/audio/sample4.mp3",
+    genre: "Nature"
   }
 ];

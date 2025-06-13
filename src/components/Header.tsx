@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const navItems = [
   { name: 'Discover', href: '#discover' },
-  { name: 'Most Stream', href: '#most-stream' },
+  { name: 'Most Stream ', href: '#most-stream' },
   { name: 'Artists', href: '#artists' },
   { name: 'Albums', href: '#albums' },
 ];
@@ -15,7 +15,6 @@ export default function Header() {
 
   const handleNavClick = (item: typeof navItems[0]) => {
     setActiveItem(item.name);
-    // Smooth scroll to section
     const element = document.querySelector(item.href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -26,7 +25,6 @@ export default function Header() {
     <div className="fixed top-0 left-0 right-0 z-50 px-6 py-6">
       <div className="grid grid-cols-3 items-center w-full">
         
-        {/* Logo SoundWave - Kolom Kiri */}
         <motion.div
           className="justify-self-start"
           initial={{ opacity: 0, x: -20 }}
@@ -50,7 +48,6 @@ export default function Header() {
           </motion.div>
         </motion.div>
 
-        {/* Navigation - Kolom Tengah */}
         <motion.nav
           className="justify-self-center"
           initial={{ opacity: 0, y: -20 }}
@@ -95,7 +92,6 @@ export default function Header() {
           </div>
         </motion.nav>
 
-        {/* Auth Buttons - Kolom Kanan */}
         <motion.div
           className="justify-self-end flex items-center gap-3"
           initial={{ opacity: 0, x: 20 }}
